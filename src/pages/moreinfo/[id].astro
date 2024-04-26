@@ -1,0 +1,9 @@
+---
+import Layout from "@layouts/Layout.astro";
+const { id } = Astro.params;
+console.log(id);
+---
+
+<Layout title="">
+  {id ?? ""}
+</Layout>
