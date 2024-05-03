@@ -1,8 +1,42 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import type { Movie } from "../../components/movies/dto/Movie";
 const { search } = Astro.params;
+const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US&query=${search}&page=1&include_adult=false`;
+const response = await fetch(endpoint);
+const data = await response.json();
+const movies: Movie[] = data.results as Movie[];
+console.log("---->", movies);
+const urlBase = "https://image.tmdb.org/t/p/w500";
 ---
 
 <Layout title="">
-  {search}
+  <div class="row">
+    {
+      movies.map((item) => (
+        <div class="col-lg-4">
+          <div class="card mt-4" style="width: 18 rem;">
+            <img
+              src={urlBase + item.poster_path}
+              class="card-img-top"
+              alt={item.original_title}
+            />
+            <div class="card-body">
+              <h5 class="card-title">{item.original_title}</h5>
+              <p class="card-text">
+                {item.original_title}
+                <br />
+                {item.original_language}
+                <br />
+                {item.overview}
+              </p>
+              <a href="#" class="btn btn-primary">
+                {item.original_language}
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </Layout>
