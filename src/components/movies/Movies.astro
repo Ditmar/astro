@@ -2,9 +2,9 @@
 import type { Movie } from "./dto/Movie";
 
 const response = await fetch(
-  "https://api.themoviedb.org/3/movie/popular?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US&page=1"
+  `${import.meta.env.API_END_POINT}/3/movie/popular?api_key=${import.meta.env.API_KEY}&language=en-US&page=1`
 );
-const urlBase = "https://image.tmdb.org/t/p/w500";
+const urlBase = import.meta.env.API_BASE_ROUTE;
 const data = await response.json();
 const moreInfo = "/moreinfo/";
 const movies: Movie[] = data.results as Movie[];

@@ -2,12 +2,11 @@
 import Layout from "@layouts/Layout.astro";
 import type { Movie } from "../../components/movies/dto/Movie";
 const { search } = Astro.params;
-const endpoint = `https://api.themoviedb.org/3/search/movie?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US&query=${search}&page=1&include_adult=false`;
+const endpoint = `${import.meta.env.API_END_POINT}/3/search/movie?api_key=${import.meta.env.API_KEY}&language=en-US&query=${search}&page=1&include_adult=false`;
 const response = await fetch(endpoint);
 const data = await response.json();
 const movies: Movie[] = data.results as Movie[];
-console.log("---->", movies);
-const urlBase = "https://image.tmdb.org/t/p/w500";
+const urlBase = import.meta.env.API_BASE_ROUTE;
 ---
 
 <Layout title="">

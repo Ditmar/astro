@@ -5,10 +5,10 @@ const { id } = Astro.params;
 //https://api.themoviedb.org/3/movie/823464?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US
 
 const response = await fetch(
-  `https://api.themoviedb.org/3/movie/${id}?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US`
+  `${import.meta.env.API_END_POINT}/3/movie/${id}?api_key=${import.meta.env.API_KEY}&language=en-US`
 );
 const data: Movie = await response.json();
-const urlBase = "https://image.tmdb.org/t/p/w500";
+const urlBase = import.meta.env.API_BASE_ROUTE;
 ---
 
 <Layout title="">
