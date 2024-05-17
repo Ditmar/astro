@@ -2,9 +2,9 @@
 import type { Movie } from "./dto/Movie";
 
 const response = await fetch(
-  `${import.meta.env.API_END_POINT}/3/movie/popular?api_key=${import.meta.env.API_KEY}&language=en-US&page=1`
+  `${Astro.locals.API_END_POINT}/3/movie/popular?api_key=${Astro.locals.API_KEY}&language=en-US&page=1`
 );
-const urlBase = import.meta.env.API_BASE_ROUTE;
+const urlBase = Astro.locals.API_BASE_ROUTE;
 const data = await response.json();
 const moreInfo = "/moreinfo/";
 const movies: Movie[] = data.results as Movie[];

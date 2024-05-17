@@ -5,10 +5,14 @@ const { id } = Astro.params;
 //https://api.themoviedb.org/3/movie/823464?api_key=bb207f6bb3ec02ab983a14ed248eebb3&language=en-US
 
 const response = await fetch(
-  `${import.meta.env.API_END_POINT}/3/movie/${id}?api_key=${import.meta.env.API_KEY}&language=en-US`
+  `${Astro.locals.API_END_POINT}/3/movie/${id}?api_key=${Astro.locals.API_KEY}u&language=en-US`
 );
 const data: Movie = await response.json();
-const urlBase = import.meta.env.API_BASE_ROUTE;
+console.log(data);
+const urlBase = Astro.locals.API_BASE_ROUTE;
+if (data.success === false) {
+  Astro.response.status = 500;
+}
 ---
 
 <Layout title="">
